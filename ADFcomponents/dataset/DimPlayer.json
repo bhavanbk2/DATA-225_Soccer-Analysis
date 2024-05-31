@@ -1,0 +1,47 @@
+{
+	"name": "DimPlayer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "player_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "player_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "birthday",
+				"type": "date"
+			},
+			{
+				"name": "height",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "weight",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DimPlayer"
+		}
+	}
+}

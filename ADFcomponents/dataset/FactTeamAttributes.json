@@ -1,0 +1,135 @@
+{
+	"name": "FactTeamAttributes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "team_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "date_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "buildUpPlaySpeed",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "buildUpPlaySpeedClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "buildUpPlayDribbling",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "buildUpPlayDribblingClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "buildUpPlayPassing",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "buildUpPlayPassingClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "buildUpPlayPositioningClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "chanceCreationPassing",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "chanceCreationPassingClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "chanceCreationCrossing",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "chanceCreationCrossingClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "chanceCreationShooting",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "chanceCreationShootingClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "chanceCreationPositioningClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "defencePressure",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "defencePressureClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "defenceAggression",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "defenceAggressionClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "defenceTeamWidth",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 6
+			},
+			{
+				"name": "defenceTeamWidthClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "defenceDefenderLineClass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "meta_update_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Fact_team_attributes"
+		}
+	}
+}

@@ -1,0 +1,339 @@
+{
+	"name": "Load_FactTeamAttributes",
+	"properties": {
+		"activities": [
+			{
+				"name": "Load_FactPlayerStats",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "MySqlSource",
+						"query": "SELECT  team_id,\n  DATE_FORMAT(`date`, '%Y%m%d') AS datekey,\n  CAST(buildUpPlaySpeed  as decimal(18,6)) buildUpPlaySpeed,\n  buildUpPlaySpeedClass ,\n  CAST(buildUpPlayDribbling  as decimal(18,6)) buildUpPlayDribbling,\n  buildUpPlayDribblingClass ,\n  CAST(buildUpPlayPassing  as decimal(18,6)) buildUpPlayPassing,\n  buildUpPlayPassingClass ,\n  buildUpPlayPositioningClass ,\n  CAST(chanceCreationPassing  as decimal(18,6)) chanceCreationPassing,\n  chanceCreationPassingClass ,\n  CAST(chanceCreationCrossing  as decimal(18,6)) chanceCreationCrossing,\n  chanceCreationCrossingClass ,\n  CAST(chanceCreationShooting  as decimal(18,6)) chanceCreationShooting,\n  chanceCreationShootingClass ,\n  chanceCreationPositioningClass ,\n  CAST(defencePressure  as decimal(18,6)) defencePressure,\n  defencePressureClass ,\n  CAST(defenceAggression  as decimal(18,6)) defenceAggression,\n  defenceAggressionClass ,\n  CAST(defenceTeamWidth  as decimal(18,6)) defenceTeamWidth,\n  defenceTeamWidthClass ,\n  defenceDefenderLineClass,\n  current_timestamp() as update_time  \nFROM socceranalysis.team_attributes;"
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": "truncate table [dbo].[Fact_team_attributes]",
+						"writeBehavior": "Insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "team_id",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "team_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "datekey",
+									"type": "String"
+								},
+								"sink": {
+									"name": "date_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "buildUpPlaySpeed",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "buildUpPlaySpeed",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "buildUpPlaySpeedClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "buildUpPlaySpeedClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "buildUpPlayDribbling",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "buildUpPlayDribbling",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "buildUpPlayDribblingClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "buildUpPlayDribblingClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "buildUpPlayPassing",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "buildUpPlayPassing",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "buildUpPlayPassingClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "buildUpPlayPassingClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "buildUpPlayPositioningClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "buildUpPlayPositioningClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "chanceCreationPassing",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "chanceCreationPassing",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "chanceCreationPassingClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "chanceCreationPassingClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "chanceCreationCrossing",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "chanceCreationCrossing",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "chanceCreationCrossingClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "chanceCreationCrossingClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "chanceCreationShooting",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "chanceCreationShooting",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "chanceCreationShootingClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "chanceCreationShootingClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "chanceCreationPositioningClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "chanceCreationPositioningClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "defencePressure",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "defencePressure",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "defencePressureClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "defencePressureClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "defenceAggression",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "defenceAggression",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "defenceAggressionClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "defenceAggressionClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "defenceTeamWidth",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "defenceTeamWidth",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "defenceTeamWidthClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "defenceTeamWidthClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "defenceDefenderLineClass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "defenceDefenderLineClass",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "update_time",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "meta_update_date",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "MySqlTable1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "FactTeamAttributes",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

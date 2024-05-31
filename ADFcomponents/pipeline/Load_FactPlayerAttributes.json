@@ -1,0 +1,578 @@
+{
+	"name": "Load_FactPlayerAttributes",
+	"properties": {
+		"activities": [
+			{
+				"name": "Load_FactPlayerStats",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "MySqlSource",
+						"query": "SELECT player_id,\n  DATE_FORMAT(`date`, '%Y%m%d') AS datekey,\n  cast(overall_rating  as decimal(18,6)) overall_rating,\n  cast(potential  as decimal(18,6)) potential,\n  preferred_foot ,\n  attacking_work_rate ,\n  defensive_work_rate ,\n  cast(crossing  as decimal(18,6)) crossing,\n  cast(finishing  as decimal(18,6)) finishing,\n  cast(heading_accuracy  as decimal(18,6)) heading_accuracy,\n  cast(short_passing  as decimal(18,6)) short_passing,\n  cast(volleys as decimal(18,6)) volleys,\n  cast(dribbling as decimal(18,6)) dribbling,\n  cast(curve as decimal(18,6)) curve,\n  cast(free_kick_accuracy as decimal(18,6)) free_kick_accuracy,\n  cast(long_passing as decimal(18,6)) long_passing,\n  cast(ball_control as decimal(18,6)) ball_control,\n  cast(acceleration as decimal(18,6)) acceleration,\n  cast(sprint_speed as decimal(18,6)) sprint_speed,\n  cast(agility as decimal(18,6)) agility,\n  cast(reactions as decimal(18,6)) reactions,\n  cast(balance as decimal(18,6)) balance,\n  cast(shot_power  as decimal(18,6)) shot_power,\n  cast(jumping  as decimal(18,6)) jumping ,\n  cast(stamina  as decimal(18,6)) stamina ,\n  cast(strength  as decimal(18,6)) strength,\n  cast(long_shots  as decimal(18,6)) long_shots,\n  cast(aggression  as decimal(18,6)) aggression,\n  cast(interceptions  as decimal(18,6)) interceptions,\n  cast(positioning  as decimal(18,6)) positioning,\n  cast(vision  as decimal(18,6)) vision,\n  cast(penalties  as decimal(18,6)) penalties,\n  cast(marking  as decimal(18,6)) marking,\n  cast(standing_tackle  as decimal(18,6)) standing_tackle,\n  cast(sliding_tackle  as decimal(18,6)) sliding_tackle,\n  cast(gk_diving  as decimal(18,6)) gk_diving,\n  cast(gk_handling  as decimal(18,6)) gk_handling,\n  cast(gk_kicking  as decimal(18,6)) gk_kicking,\n  cast(gk_positioning  as decimal(18,6)) gk_positioning,\n  cast(gk_reflexes  as decimal(18,6)) gk_reflexes,\n  current_timestamp() as update_time \n FROM socceranalysis.player_attributes;"
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": "truncate table [dbo].[Fact_player_attributes]",
+						"writeBehavior": "Insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "player_id",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "player_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "datekey",
+									"type": "String"
+								},
+								"sink": {
+									"name": "date_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "overall_rating",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "overall_rating",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "potential",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "potential",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "preferred_foot",
+									"type": "String"
+								},
+								"sink": {
+									"name": "preferred_foot",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "attacking_work_rate",
+									"type": "String"
+								},
+								"sink": {
+									"name": "attacking_work_rate",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "defensive_work_rate",
+									"type": "String"
+								},
+								"sink": {
+									"name": "defensive_work_rate",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "crossing",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "crossing",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "finishing",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "finishing",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "heading_accuracy",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "heading_accuracy",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "short_passing",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "short_passing",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "volleys",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "volleys",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "dribbling",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "dribbling",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "curve",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "curve",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "free_kick_accuracy",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "free_kick_accuracy",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "long_passing",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "long_passing",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "ball_control",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ball_control",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "acceleration",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "acceleration",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "sprint_speed",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "sprint_speed",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "agility",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "agility",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "reactions",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "reactions",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "balance",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "balance",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "shot_power",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "shot_power",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "jumping",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "jumping",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "stamina",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "stamina",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "strength",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "strength",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "long_shots",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "long_shots",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "aggression",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "aggression",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "interceptions",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "interceptions",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "positioning",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "positioning",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "vision",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "vision",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "penalties",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "penalties",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "marking",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "marking",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "standing_tackle",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "standing_tackle",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "sliding_tackle",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "sliding_tackle",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "gk_diving",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "gk_diving",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "gk_handling",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "gk_handling",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "gk_kicking",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "gk_kicking",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "gk_positioning",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "gk_positioning",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "gk_reflexes",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "gk_reflexes",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "update_time",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "meta_update_date",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "MySqlTable1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "FactPlayerAttributes",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

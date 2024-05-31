@@ -1,0 +1,130 @@
+{
+	"name": "Load_DimPlayer",
+	"properties": {
+		"activities": [
+			{
+				"name": "PlayerDataFromCosmosDBToDW",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:05:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "CosmosDbMongoDbApiSource",
+						"additionalColumns": [
+							{
+								"name": "meta_update_date",
+								"value": {
+									"value": "@utcNow()",
+									"type": "Expression"
+								}
+							}
+						],
+						"batchSize": 100
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"writeBehavior": "Upsert",
+						"upsertSettings": {
+							"keys": [
+								"player_id"
+							],
+							"interimSchemaName": ""
+						},
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['name']"
+								},
+								"sink": {
+									"name": "player_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['dob']"
+								},
+								"sink": {
+									"name": "birthday",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['height']"
+								},
+								"sink": {
+									"name": "height",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['weight']"
+								},
+								"sink": {
+									"name": "weight",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['player_id']"
+								},
+								"sink": {
+									"name": "player_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['meta_update_date']"
+								},
+								"sink": {
+									"name": "meta_update_date",
+									"type": "DateTime"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": false
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CosmosDbMongoDbCollection1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DimPlayer",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

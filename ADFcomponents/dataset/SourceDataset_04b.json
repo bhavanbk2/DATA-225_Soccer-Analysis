@@ -1,0 +1,52 @@
+{
+	"name": "SourceDataset_04b",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Player.csv",
+				"container": "playerdata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "player_api_id",
+				"type": "String"
+			},
+			{
+				"name": "player_name",
+				"type": "String"
+			},
+			{
+				"name": "player_fifa_api_id",
+				"type": "String"
+			},
+			{
+				"name": "birthday",
+				"type": "String"
+			},
+			{
+				"name": "height",
+				"type": "String"
+			},
+			{
+				"name": "weight",
+				"type": "String"
+			}
+		]
+	}
+}

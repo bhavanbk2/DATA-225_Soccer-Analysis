@@ -1,0 +1,799 @@
+{
+	"name": "Load_FactMatch",
+	"properties": {
+		"activities": [
+			{
+				"name": "Load_FactMatch",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "MySqlSource",
+						"query": "SELECT \n  league_id,\n  season,\n  stage,\n  DATE_FORMAT(`date`, '%Y%m%d') AS datekey,\n  match_id,\n  home_team_id ,\n  away_team_id,\n  home_team_goal,\n  away_team_goal,\n  home_player_1 ,\n  home_player_2,\n  home_player_3 ,\n  home_player_4 ,\n  home_player_5 ,\n  home_player_6 ,\n  home_player_7 ,\n  home_player_8 ,\n  home_player_9 ,\n  home_player_10 ,\n  home_player_11 ,\n  away_player_1 ,\n  away_player_2 ,\n  away_player_3 ,\n  away_player_4 ,\n  away_player_5 ,\n  away_player_6 ,\n  away_player_7 ,\n  away_player_8 ,\n  away_player_9 ,\n  away_player_10 ,\n  away_player_11 ,\n  CAST(B365H as decimal(18,6)) B365H,\n  CAST(B365D as decimal(18,6)) B365D,\n  CAST(B365A as decimal(18,6)) B365A,\n  CAST(BWH as decimal(18,6)) BWH,\n  CAST(BWD as decimal(18,6)) BWD,\n  CAST(BWA as decimal(18,6)) BWA,\n  CAST(IWH as decimal(18,6)) IWH,\n  CAST(IWD as decimal(18,6)) IWD,\n  CAST(IWA as decimal(18,6)) IWA,\n  CAST(LBH as decimal(18,6)) LBH,\n  CAST(LBD as decimal(18,6)) LBD,\n CAST(LBA as decimal(18,6)) LBA,\n  CAST(PSH as decimal(18,6)) PSH,\n  CAST(PSD as decimal(18,6)) PSD,\n  CAST(PSA as decimal(18,6)) PSA,\n  CAST(WHH as decimal(18,6)) WHH,\n  CAST(WHD as decimal(18,6)) WHD,\n  CAST(WHA as decimal(18,6)) WHA,\n  CAST(SJH as decimal(18,6)) SJH,\n  CAST(SJD as decimal(18,6)) SJD,\n  CAST(SJA as decimal(18,6)) SJA,\n  CAST(VCH as decimal(18,6)) VCH,\n  CAST(VCD as decimal(18,6)) VCD,\n  CAST(VCA as decimal(18,6)) VCA,\n  CAST(GBH as decimal(18,6)) GBH,\n  CAST(GBD as decimal(18,6)) GBD,\n  CAST(GBA as decimal(18,6)) GBA,\n  CAST(BSH as decimal(18,6)) BSH,\n  CAST(BSD as decimal(18,6)) BSD,\n  CAST(BSA as decimal(18,6)) BSA,\n  current_timestamp() as update_time \n FROM socceranalysis.match;"
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": "truncate table [dbo].[Fact_match]",
+						"writeBehavior": "Insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "league_id",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "league_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "season",
+									"type": "String"
+								},
+								"sink": {
+									"name": "season",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "stage",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "stage",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "datekey",
+									"type": "String"
+								},
+								"sink": {
+									"name": "date_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "match_id",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "match_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_team_id",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_team_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_team_id",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_team_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_team_goal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "home_team_goal",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_team_goal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "away_team_goal",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_player_1",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_player_1",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_player_2",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_player_2",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_player_3",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_player_3",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_player_4",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_player_4",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_player_5",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_player_5",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_player_6",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_player_6",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_player_7",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_player_7",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_player_8",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_player_8",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_player_9",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_player_9",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_player_10",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_player_10",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "home_player_11",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "home_player_11",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_player_1",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_player_1",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_player_2",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_player_2",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_player_3",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_player_3",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_player_4",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_player_4",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_player_5",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_player_5",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_player_6",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_player_6",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_player_7",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_player_7",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_player_8",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_player_8",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_player_9",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_player_9",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_player_10",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_player_10",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "away_player_11",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "away_player_11",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "B365H",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BettingOddsHomeWin_B365H",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "B365D",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BettingOddsDraw_B365D",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "B365A",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BettingOddsAwayWin_B365A",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "BWH",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BWH",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "BWD",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BWD",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "BWA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BWA",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "IWH",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "IWH",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "IWD",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "IWD",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "IWA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "IWA",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "LBH",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "LBH",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "LBD",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "LBD",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "LBA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "LBA",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "PSH",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PSH",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "PSD",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PSD",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "PSA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PSA",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "WHH",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "WHH",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "WHD",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "WHD",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "WHA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "WHA",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "SJH",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "SJH",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "SJD",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "SJD",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "SJA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "SJA",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "VCH",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VCH",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "VCD",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VCD",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "VCA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VCA",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "GBH",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "GBH",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "GBD",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "GBD",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "GBA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "GBA",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "BSH",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BSH",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "BSD",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BSD",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "BSA",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BSA",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "update_time",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "meta_update_date",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "MySqlTable1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "FactMatch",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"name": "soccerDataETL",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "977fb483-a40e-43a4-aaf1-ef8b9088a673",
+		"tenantId": "280bfb76-69b0-4beb-8551-ba0d735bd380"
+	}
+}
